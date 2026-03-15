@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<h2 style="text-align:center;font-family:'Playfair Display',serif;"> A small birthday letter for Muskan </h2>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Protocol</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+background: linear-gradient(135deg,#eaf6ff,#fff4e6);
+color:#2c3e50;
+font-family:'Playfair Display', serif;
+padding:40px;
+overflow-x:hidden;
+}
+
+#terminal{
+max-width:900px;
+margin:auto;
+white-space:pre-wrap;
+font-size:22px;
+line-height:1.7;
+font-family:'Quicksand', sans-serif;
+
+background:rgba(255,255,255,0.7);
+padding:40px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+input{
+background:white;
+border:none;
+border-bottom:3px solid #ff7a45;
+color:#2c3e50;
+font-family:'Quicksand', sans-serif;
+font-size:24px;
+padding:5px;
+outline:none;
+}
+
+.hidden{
+display:none;
+}
+
+.confetti{
+position:fixed;
+width:10px;
+height:10px;
+top:-10px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+
+<div id="inputBox" class="hidden">
+<br>
+Enter Access Code: <input id="password" autofocus>
+</div>
+
+<script>
+
+const terminal = document.getElementById("terminal")
+
+function type(text, speed=25){
+return new Promise(resolve=>{
+let i=0
+function typing(){
+if(i<text.length){
+terminal.innerHTML += text.charAt(i)
+i++
+setTimeout(typing,speed)
+}else{
+terminal.innerHTML += "\n"
+resolve()
+}
+}
+typing()
+})
+}
+
+function sleep(ms){
+return new Promise(r=>setTimeout(r,ms))
+}
+
+function waitForEnter(){
+return new Promise(resolve=>{
+document.addEventListener("keydown",function handler(e){
+if(e.key==="Enter"){
+document.removeEventListener("keydown",handler)
+resolve()
+}
+})
+})
+}
+
+async function run(){
+
+await type("############################################################")
+await type("#                                                          #")
+await type("#     Consider this message as Page 0 of your books.       #")
+await type("#                                                          #")
+await type("############################################################")
+
+await type("")
+await type("Press ENTER to begin the birthday protocol...")
+
+await waitForEnter()
+
+terminal.innerHTML=""
+
+await type("Initializing Birthday Protocol...")
+await sleep(800)
+
+await type("Connecting to Happiness Server...")
+await sleep(800)
+
+await type("Scanning system for birthday person...")
+await sleep(1200)
+
+await type("[##########] 100%")
+
+await type("")
+await type("Access granted.")
+await type("")
+await type("Searching database...")
+await sleep(1500)
+await type("")
+await type("Result Found:")
+await type("")
+await type("Name: Muskan")
+await type("Status: Birthday Girl")
+await type("Awesomeness Level: Extremely High")
+
+await type("")
+await type("=====================================")
+await type("SYSTEM MESSAGE")
+await type("=====================================")
+
+await type("")
+await type("Dear Muskan,")
+
+await type("")
+await type("After scanning millions of books...")
+await type("I realized something important.")
+
+await type("")
+await type("Great stories deserve great readers.")
+
+await type("")
+await type("That is why these books are for you.")
+await type("May they take you to new worlds...")
+await type("May they inspire you...")
+await type("And may they remind you...")
+await type("Someone carefully picked them for you.")
+
+await type("")
+await type("=====================================")
+await type("HAPPY BIRTHDAY!")
+await type("=====================================")
+
+await type("")
+await type("WAIT WAIT...")
+await sleep(2000)
+
+await type("")
+await type("BIRTHDAY MESSAGE VAULT")
+
+document.getElementById("inputBox").classList.remove("hidden")
+
+}
+
+document.getElementById("password").addEventListener("keydown", async function(e){
+
+if(e.key==="Enter"){
+
+let pass=this.value.trim().toLowerCase()
+
+if(pass==="03-22" || pass==="march twenty two"){
+
+document.getElementById("inputBox").style.display="none"
+
+await type("")
+await type("Access Code Accepted.")
+await type("Decrypting Message...")
+
+await sleep(800)
+
+await type("")
+await type("████░░░░░░ 20%")
+await type("")
+await sleep(800)
+await type("██████░░░░ 60%")
+await type("")
+await sleep(1500)
+await type("██████████ 100%")
+
+await type("")
+confetti()
+await type("Happy Birthday Muskan 🎉,")
+await type("")
+
+await type("I don't know why, but this birthday of yours made me feel that I should finally give you a gift... and somehow I actually did it. 🤣")
+
+await type("")
+await type("Usually I give gifts only to the people I feel really close to.")
+
+await type("")
+await type("In my life there are only a few such people - two friends who are like brothers to me since school, and then there is you from my college days.")
+
+await type("")
+await type("You once shared that reel saying if you gift a book to a friend it gives them a long life.")
+
+await type("")
+await type("I know it was meant to be funny, but that small reel actually stayed in my mind and gave me the idea to gift you a book.")
+
+await type("")
+await type("The funny part is that I have literally never read a book in my life, so my knowledge about books is ZERO. 😅")
+
+await type("")
+await type("At that moment I asked you which book you wanted.")
+
+await type("")
+await type("Honestly, I was even ready to send you the most expensive one I could find... but I know your nature - you would never accept something like that.")
+
+await type("")
+await type("So I thought the best way is to ask you directly what you really wanted.")
+
+await type("")
+await type("You gave me two choices.")
+
+await type("")
+await type("One was The Locked Door, which I already sent you earlier.")
+
+await type("")
+await type("And the second one... is this.")
+
+await type("")
+await type("So today, on your birthday, I'm sending you")
+
+await type("Shatter Me - My Touch Is Power")
+
+await type("and")
+
+await type("The Kite Runner.")
+
+await type("")
+await type("Now I haven’t read books, but from what I know about *Shatter Me*, it talks about someone who feels like their touch can break things...")
+
+await type("")
+await type("yet that same power can also become their strength.")
+
+await type("")
+await type("It made me think how sometimes even small moments we don’t notice can end up having the biggest impact on someone's life")
+
+await type("")
+await type("Like that one day when I was just rambling about everything going on in my life and you were simply there listening to me continuously.")
+
+await type("")
+await type("I don't know if you remember that moment or not, but I still do.")
+
+await type("")
+await type("From that day, you had a different position in my life.")
+
+await type("")
+await type("You probably thought it was just another normal conversation, but sometimes just listening to someone is enough to give them strength.")
+
+await type("")
+await type('So technically if this book says touch has power... then maybe your "listening power" is also not less dangerous 😄')
+
+await type("")
+await type("And the other book talks about something I believe in a lot — friendships and memories that stay with us for a long time.")
+
+await type("")
+await type("I believe real friendships are not always about big gestures.")
+
+await type("")
+await type("Sometimes they are just about random conversations, laughing over nonsense things, listening when someone is talking too much (like I do), and still being there.")
+
+await type("")
+await type("And that is something I have always appreciated about you.")
+
+await type("")
+await type("I never forget people who never forget me.")
+
+await type("")
+await type("So on your birthday I just wanted to say thank you -")
+
+await type("")
+await type("for the conversations,")
+
+await type("for the laughs,")
+
+await type("and for the quiet support you gave without even realizing how much it meant.")
+
+await type("")
+await type("I hope these books stay with you the way some memories stay with us - ")
+
+await type("")
+await type("as reminders of strength, kindness, and meaningful friendships.")
+
+await type("")
+await type("Happy Birthday once again, Muskan 🎂")
+
+await type("")
+await type("May your life be full of good stories, good people, and fewer people like me who keep rambling endlessly 😄")
+
+await type("")
+await type("Enjoy the books 📚✨")
+
+confetti()
+
+}else{
+
+terminal.innerHTML += "\nIncorrect code. Hint: Think of the birthday you are celebrating today.\n"
+this.value=""
+
+}
+
+}
+
+})
+
+function confetti(){
+
+for(let i=0;i<150;i++){
+
+let c=document.createElement("div")
+
+c.className="confetti"
+
+c.style.left=Math.random()*100+"vw"
+
+const colors=["#ff7a45","#ffb347","#6fa8dc","#ff4d6d"]
+c.style.background=colors[Math.floor(Math.random()*colors.length)]
+
+c.style.animationDuration=3+Math.random()*3+"s"
+
+document.body.appendChild(c)
+
+}
+
+}
+
+run()
+
+</script>
+
+</body>
+</html>
