@@ -133,13 +133,15 @@ function waitForEnter(){
 
 async function run(){
 
-await type(`<pre style="font-family: 'JetBrains Mono', monospace;">
+terminal.innerHTML += `
+<pre style="font-family: 'JetBrains Mono', monospace;">
 ############################################################
 #                                                          #
 #     Consider this message as Page 0 of your books.       #
 #                                                          #
 ############################################################
-</pre>`)
+</pre>
+`;
 
 await type("")
 await type("Press ENTER to begin the birthday protocol...")
