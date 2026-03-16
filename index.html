@@ -75,6 +75,18 @@ transform:translateY(110vh) rotate(360deg);
 Enter Access Code: <input id="password" autofocus>
 </div>
 
+<div id="enterBtnContainer" style="text-align:center; margin-top:20px;">
+  <button id="enterBtn" style="
+    font-size:18px;
+    padding:10px 20px;
+    border:none;
+    background:#ff7a45;
+    color:white;
+    border-radius:8px;
+    cursor:pointer;
+  ">Press to Continue</button>
+</div>
+  
 <script>
 
 const terminal = document.getElementById("terminal")
@@ -101,23 +113,33 @@ return new Promise(r=>setTimeout(r,ms))
 }
 
 function waitForEnter(){
-return new Promise(resolve=>{
-document.addEventListener("keydown",function handler(e){
-if(e.key==="Enter"){
-document.removeEventListener("keydown",handler)
-resolve()
-}
-})
-})
+  return new Promise(resolve=>{
+    function handler(e){
+      if(e.key==="Enter"){
+        document.removeEventListener("keydown",handler)
+        resolve()
+      }
+    }
+    document.addEventListener("keydown",handler)
+
+    const btn = document.getElementById("enterBtn")
+    btn.addEventListener("click", function btnHandler(){
+      btn.removeEventListener("click",btnHandler)
+      document.getElementById("enterBtnContainer").style.display = "none"
+      resolve()
+    })
+  })
 }
 
 async function run(){
 
-await type("############################################################")
-await type("#                                                          #")
-await type("#     Consider this message as Page 0 of your books.       #")
-await type("#                                                          #")
-await type("############################################################")
+await type(`<pre style="font-family: 'JetBrains Mono', monospace;">
+############################################################
+#                                                          #
+#     Consider this message as Page 0 of your books.       #
+#                                                          #
+############################################################
+</pre>`)
 
 await type("")
 await type("Press ENTER to begin the birthday protocol...")
