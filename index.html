@@ -21,17 +21,21 @@ overflow-x:hidden;
 }
 
 #terminal{
-max-width:900px;
-margin:auto;
-white-space:pre-wrap;
-font-size:22px;
-line-height:1.7;
-font-family:'Quicksand', sans-serif;
+  max-width:900px;
+  height: 70vh;           /* fixed height */
+  margin:auto;
+  white-space:pre-wrap;
+  font-size:22px;
+  line-height:1.7;
+  font-family:'Quicksand', sans-serif;
 
-background:rgba(255,255,255,0.7);
-padding:40px;
-border-radius:16px;
-box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  background:rgba(255,255,255,0.7);
+  padding:40px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+  overflow-y: auto;       /* enable vertical scrolling */
+  overflow-x: hidden;     /* prevent horizontal scroll */
 }
 
 input{
@@ -91,21 +95,39 @@ Enter Access Code: <input id="password" autofocus>
 
 const terminal = document.getElementById("terminal")
 
+let autoScroll = true; // flag to track if auto-scroll is active
+
+// detect user scroll
+terminal.addEventListener('scroll', () => {
+  // If user scrolls up, disable auto-scroll
+  if (terminal.scrollTop + terminal.clientHeight < terminal.scrollHeight - 5) {
+    autoScroll = false;
+  } else {
+    autoScroll = true;
+  }
+});
+
 function type(text, speed=25){
-return new Promise(resolve=>{
-let i=0
-function typing(){
-if(i<text.length){
-terminal.innerHTML += text.charAt(i)
-i++
-setTimeout(typing,speed)
-}else{
-terminal.innerHTML += "\n"
-resolve()
-}
-}
-typing()
-})
+  return new Promise(resolve=>{
+    let i=0
+    function typing(){
+      if(i < text.length){
+        terminal.innerHTML += text.charAt(i)
+        i++
+        if(autoScroll){
+          terminal.scrollTop = terminal.scrollHeight
+        }
+        setTimeout(typing, speed)
+      } else {
+        terminal.innerHTML += "\n"
+        if(autoScroll){
+          terminal.scrollTop = terminal.scrollHeight
+        }
+        resolve()
+      }
+    }
+    typing()
+  })
 }
 
 function sleep(ms){
@@ -170,8 +192,10 @@ await type("")
 await type("Result Found:")
 await type("")
 await type("Name: Muskan")
+await sleep(800)
 await type("Status: Birthday Girl")
-await type("Awesomeness Level: Extremely High")
+await sleep(800)
+await type("Bakchodi Level: Extremely High")
 
 await type("")
 await type("=====================================")
@@ -212,32 +236,25 @@ document.getElementById("inputBox").classList.remove("hidden")
 }
 
 document.getElementById("password").addEventListener("keydown", async function(e){
+  if(e.key==="Enter"){
+    let pass = this.value.trim();  // keep case as typed
+    if(pass === "March twenty Two"){  // case-sensitive
+      document.getElementById("inputBox").style.display="none"
+      await type("")
+      await type("Access Code Accepted.")
+      await type("Decrypting Message...")
+      await sleep(800)
 
-if(e.key==="Enter"){
-
-let pass=this.value.trim().toLowerCase()
-
-if(pass==="03-22" || pass==="march twenty two"){
-
-document.getElementById("inputBox").style.display="none"
-
-await type("")
-await type("Access Code Accepted.")
-await type("Decrypting Message...")
-
-await sleep(800)
-
-await type("")
-await type("████░░░░░░ 20%")
-await type("")
-await sleep(800)
-await type("██████░░░░ 60%")
-await type("")
-await sleep(1500)
-await type("██████████ 100%")
-
-await type("")
-confetti()
+      await type("")
+      await type("████░░░░░░ 20%")
+      await type("")
+      await sleep(800)
+      await type("██████░░░░ 60%")
+      await type("")
+      await sleep(1500)
+      await type("██████████ 100%")
+      await type("")
+      confetti()
 await type("Happy Birthday Muskan 🎉,")
 await type("")
 
@@ -351,15 +368,12 @@ await type("Enjoy the books 📚✨")
 
 confetti()
 
-}else{
-
-terminal.innerHTML += "\nIncorrect code. Hint: Think of the birthday you are celebrating today.\n"
-this.value=""
-
-}
-
-}
-
+} else {
+      terminal.innerHTML += "\nIncorrect code. Hint: Think of the birthday you are celebrating today.\n"
+      terminal.scrollTo({ top: terminal.scrollHeight, behavior: 'smooth' });
+      this.value=""
+    }
+  }
 })
 
 function confetti(){
